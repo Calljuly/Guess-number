@@ -1,10 +1,11 @@
 import React from 'react'
-import {View, Text, StyleSheet, Button, Image, Dimensions} from 'react-native'
+import {View, Text, StyleSheet, Image, Dimensions, ScrollView} from 'react-native'
 import MainButton from './MainButton'
 
 const GameOver = (props) =>{
+    
     return (
-        <View style={styles.gameOver}>
+        <ScrollView style={styles.gameOver} contentContainerStyle={{justifyContent:'center',alignItems: 'center'}}>
             <Text>Game over </Text>
             <Image 
             style={styles.image} 
@@ -14,15 +15,14 @@ const GameOver = (props) =>{
             <Text>Number of rounds : {props.rounds}</Text>
             <Text>User Number was : {props.userChoise}</Text>
             <MainButton click={props.newGame}>New Game!</MainButton>
-        </View>
+        </ScrollView>
         );
 }
 
 const styles = StyleSheet.create({
     gameOver:{
         flex: 1,
-        justifyContent:'center',
-        alignItems: 'center'
+        marginBottom: 10
     },
     image: {
         width: '80%',

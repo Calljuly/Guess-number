@@ -73,11 +73,11 @@ const HomeScreen = (props) => {
                 change={handler}
                 value={enteredValue} />
                 <View style={styles.buttonContainer}>
-                   <View style={{width: buttonStyle}}>
+                   <View style={{width: buttonStyle, margin:5}}>
                         <Button title="Reset" 
                         color='#c717fc' 
                         onPress={resetInputHandler}/></View>
-                   <View style={{width: buttonStyle}}>
+                   <View style={{width: buttonStyle, margin:5}}>
                         <Button title="Confirm" 
                         color='#F7287b' 
                         onPress={confirmInputHandler} /></View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     inputContainer:{
-        width: '80%',
+        width: '90%',
         minWidth: 300,
         maxWidth: '95%',
         alignContent: 'center',
