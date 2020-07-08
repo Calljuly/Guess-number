@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {ScrollView, View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, KeyboardAvoidingView} from 'react-native'
 
 import Card from './Card'
@@ -10,7 +10,9 @@ const HomeScreen = (props) => {
     const [enteredValue, setValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
     const [selectedNumber, setNumber] = useState();
+    const [buttonStyle, setButtonStyle] = useState(Dimensions.get('window').width / 5);
 
+    
     const handler = (input) => {
         setValue(input.replace(/[^0-9]/g,''));
    }
@@ -41,6 +43,18 @@ const HomeScreen = (props) => {
         
         </Card>;
    }
+
+   useEffect(() =>{
+    const buttonStyleHandler = () =>{
+        setButtonStyle(Dimensions.get('window').width / 5);
+    }
+    Dimensions.addEventListener('change', buttonStyleHandler);
+    
+       return ()=>{
+        Dimensions.removeEventListener('change', buttonStyleHandler);
+       }
+   });
+
     return (
         
         <TouchableWithoutFeedback onPress={() =>{
@@ -59,11 +73,11 @@ const HomeScreen = (props) => {
                 change={handler}
                 value={enteredValue} />
                 <View style={styles.buttonContainer}>
-                   <View style={styles.button}>
+                   <View style={{width: buttonStyle}}>
                         <Button title="Reset" 
                         color='#c717fc' 
                         onPress={resetInputHandler}/></View>
-                   <View style={styles.button}>
+                   <View style={{width: buttonStyle}}>
                         <Button title="Confirm" 
                         color='#F7287b' 
                         onPress={confirmInputHandler} /></View>
@@ -87,22 +101,20 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         flexDirection: 'row',
-        justifyContent:'space-between',
+        justifyContent:'center',
         paddingHorizontal:15
     },
     title:{
         fontSize: 20,
         marginVertical: 10,
-        fontFamily :'open-sans-bold'
+        fontFamily :'open-sans-bold',
+        textAlign: 'center'
     },
     inputContainer:{
         width: '80%',
         minWidth: 300,
         maxWidth: '95%',
         alignContent: 'center',
-    },
-    button: {
-        width: Dimensions.get('window').width / 4
     },
     summary :{
         marginTop: 20,
